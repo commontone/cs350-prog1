@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include "readArgs.h"
+
 
 int main() {
 	return 0;
 }
+
