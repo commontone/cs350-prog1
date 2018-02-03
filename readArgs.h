@@ -6,10 +6,10 @@
 #include <string.h>
 #include <errno.h>
 
-extern int readArgs(int a, char **argv, int*, int*, int*, int*, FILE**, FILE*, FILE*);
-
+extern int readArgs(int a, char **argv, int*, int*, int*, int*, FILE**, FILE**, FILE**);
 void argerror(void);
-int readArgs(int argc, char **argv, int* numbers, int* min, int*max, int*seed, FILE** infile, FILE* outfile, FILE* userfile) {
+
+int readArgs(int argc, char **argv, int* numbers, int* min, int*max, int*seed, FILE** infile, FILE** outfile, FILE** userfile) {
 	
 	int i;
 	
@@ -70,6 +70,7 @@ int readArgs(int argc, char **argv, int* numbers, int* min, int*max, int*seed, F
 				argerror();
 				return(1);
 			}
+			*outfile = fopen(argv[i],"w+");
 		} else if (strcmp(argv[i], "-c") == 0) { /* C FILE */
 			if(strcmp(argv[0], "./prog1generator") == 0) {
 				argerror();
@@ -80,7 +81,7 @@ int readArgs(int argc, char **argv, int* numbers, int* min, int*max, int*seed, F
 				argerror();
 				return(1);
 			}
-			
+			*userfile = fopen(argv[i],"w+");
 		} else {
 			return(1);
 		}

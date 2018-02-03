@@ -13,7 +13,7 @@ prog1generator.o: prog1generator.c readArgs.h
 	gcc -c prog1generator.c -o prog1generator.o
 	
 checkmemSort: prog1sorter
-	valgrind ./prog1sorter
+	valgrind ./prog1sorter $(ARGS)
 	
 runSort: prog1sorter
 	./prog1sorter $(ARGS)
