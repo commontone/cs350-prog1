@@ -1,15 +1,18 @@
-#ifndef READ_ARGS
-#define READ_ARGS
+#ifndef READ_ARGS_H
+#define READ_ARGS_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <time.h>
+#include <sys/time.h>
 
-extern int readArgs(int a, char **argv, int*, int*, int*, int*, FILE**, FILE**, FILE**);
+
+extern int readArgs(int a, char **argv, int*, int*, int*, unsigned long*, FILE**, FILE**, FILE**);
 void argerror(void);
 
-int readArgs(int argc, char **argv, int* numbers, int* min, int*max, int*seed, FILE** infile, FILE** outfile, FILE** userfile) {
+int readArgs(int argc, char **argv, int* numbers, int* min, int* max,unsigned long* seed, FILE** infile, FILE** outfile, FILE** userfile) {
 	
 	int i;
 	
@@ -53,6 +56,8 @@ int readArgs(int argc, char **argv, int* numbers, int* min, int*max, int*seed, F
 				argerror();
 				return(1);
 			}
+			int see = atoi(argv[i]);
+			*seed = see;
 		} else if (strcmp(argv[i], "-i") == 0) { /* INPUT FILE */
 			if(strcmp(argv[0], "./prog1generator") == 0) {
 				argerror();
@@ -81,7 +86,7 @@ int readArgs(int argc, char **argv, int* numbers, int* min, int*max, int*seed, F
 				argerror();
 				return(1);
 			}
-			*userfile = fopen(argv[i],"w+");
+			*userfile = fopen(argv[i],"w");
 		} else {
 			return(1);
 		}
